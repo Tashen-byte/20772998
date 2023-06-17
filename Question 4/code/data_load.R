@@ -8,4 +8,3 @@ movies <- read_csv("C:/Users/tashe/Desktop/20772998/Question 4/data/Movies.csv")
 titles <- read_csv("C:/Users/tashe/Desktop/20772998/Question 4/data/titles.csv")%>%
     mutate(genres = str_replace_all(genres, "[\\[\\]']", ""))
 
-

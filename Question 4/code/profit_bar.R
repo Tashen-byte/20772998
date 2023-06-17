@@ -1,9 +1,7 @@
 
 
-library(ggplot2)
-
-
 profit <- function(data, title, ylab, xlab){
+    library(ggplot2)
 
     mov <- data %>%
         group_by(genre) %>%

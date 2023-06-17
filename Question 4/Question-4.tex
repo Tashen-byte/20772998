@@ -1,0 +1,366 @@
+\documentclass[11pt,preprint, authoryear]{elsarticle}
+
+\usepackage{lmodern}
+%%%% My spacing
+\usepackage{setspace}
+\setstretch{1.2}
+\DeclareMathSizes{12}{14}{10}{10}
+
+% Wrap around which gives all figures included the [H] command, or places it "here". This can be tedious to code in Rmarkdown.
+\usepackage{float}
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
+
+\let\origtable\table
+\let\endorigtable\endtable
+\renewenvironment{table}[1][2] {
+    \expandafter\origtable\expandafter[H]
+} {
+    \endorigtable
+}
+
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+
+\usepackage{amssymb, amsmath, amsthm, amsfonts}
+
+\def\bibsection{\section*{References}} %%% Make "References" appear before bibliography
+
+
+\usepackage[round]{natbib}
+
+\usepackage{longtable}
+\usepackage[margin=2.3cm,bottom=2cm,top=2.5cm, includefoot]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bottom, hang, flushmargin]{footmisc}
+\usepackage{graphicx}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1.3ex plus 0.5ex minus 0.3ex}
+\usepackage{textcomp}
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+
+%%%%  Remove the "preprint submitted to" part. Don't worry about this either, it just looks better without it:
+\makeatletter
+\def\ps@pprintTitle{%
+  \let\@oddhead\@empty
+  \let\@evenhead\@empty
+  \let\@oddfoot\@empty
+  \let\@evenfoot\@oddfoot
+}
+\makeatother
+
+ \def\tightlist{} % This allows for subbullets!
+
+\usepackage{hyperref}
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=blue,
+            pdfborder={0 0 0}}
+
+
+% The following packages allow huxtable to work:
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{caption}
+
+
+\newenvironment{columns}[1][]{}{}
+
+\newenvironment{column}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
+
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
+
+\makeatletter
+\def\ignorespacesandallpars{%
+  \@ifnextchar\par
+    {\expandafter\ignorespacesandallpars\@gobble}%
+    {}%
+}
+\makeatother
+
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{CSLReferences}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
+
+
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{5}
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
+%%% Include extra packages specified by user
+
+%%% Hard setting column skips for reports - this ensures greater consistency and control over the length settings in the document.
+%% page layout
+%% paragraphs
+\setlength{\baselineskip}{12pt plus 0pt minus 0pt}
+\setlength{\parskip}{12pt plus 0pt minus 0pt}
+\setlength{\parindent}{0pt plus 0pt minus 0pt}
+%% floats
+\setlength{\floatsep}{12pt plus 0 pt minus 0pt}
+\setlength{\textfloatsep}{20pt plus 0pt minus 0pt}
+\setlength{\intextsep}{14pt plus 0pt minus 0pt}
+\setlength{\dbltextfloatsep}{20pt plus 0pt minus 0pt}
+\setlength{\dblfloatsep}{14pt plus 0pt minus 0pt}
+%% maths
+\setlength{\abovedisplayskip}{12pt plus 0pt minus 0pt}
+\setlength{\belowdisplayskip}{12pt plus 0pt minus 0pt}
+%% lists
+\setlength{\topsep}{10pt plus 0pt minus 0pt}
+\setlength{\partopsep}{3pt plus 0pt minus 0pt}
+\setlength{\itemsep}{5pt plus 0pt minus 0pt}
+\setlength{\labelsep}{8mm plus 0mm minus 0mm}
+\setlength{\parsep}{\the\parskip}
+\setlength{\listparindent}{\the\parindent}
+%% verbatim
+\setlength{\fboxsep}{5pt plus 0pt minus 0pt}
+
+
+
+\begin{document}
+
+
+
+\begin{frontmatter}  %
+
+\title{Netflix and Chill 2.0}
+
+% Set to FALSE if wanting to remove title (for submission)
+
+
+
+
+\author[Add1]{TasheN Naidoo}
+\ead{20772998@sun.ac.za}
+
+
+
+
+
+\address[Add1]{MCom Economics Student, Stellenosch Univesrsity, South
+Africa}
+
+\cortext[cor]{Corresponding author: TasheN Naidoo}
+
+\begin{abstract}
+\small{
+This report provides a short summary of the a breakdown of which genres
+are most profitbale, which studios are most liked, and what is most
+liked on Netflix.
+}
+\end{abstract}
+
+\vspace{1cm}
+
+
+
+
+
+\vspace{0.5cm}
+
+\end{frontmatter}
+
+
+
+%________________________
+% Header and Footers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\chead{}
+\rhead{}
+\lfoot{}
+\rfoot{\footnotesize Page \thepage}
+\lhead{}
+%\rfoot{\footnotesize Page \thepage } % "e.g. Page 2"
+\cfoot{}
+
+%\setlength\headheight{30pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%________________________
+
+\headsep 35pt % So that header does not go over title
+
+
+
+
+\hypertarget{introduction}{%
+\section{\texorpdfstring{Introduction
+\label{Introduction}}{Introduction }}\label{introduction}}
+
+\hypertarget{data}{%
+\section*{Data}\label{data}}
+\addcontentsline{toc}{section}{Data}
+
+Data is provided for lead movie studios in the \emph{movies} data set.
+This data set provides insight into which movie genre is most profitable
+and most liked, according to the audience score and rotten tomatoes
+percent. The \emph{titles} and \emph{credits} data set contains
+information on the movies and shows present on the Netflix platform.
+
+\hypertarget{most-profitable-movie-genre}{%
+\subsection{Most Profitable Movie
+Genre}\label{most-profitable-movie-genre}}
+
+Lets take a look at what genres are most profitable, as the more money
+accumulated from a movie type, indicates that more people have watched
+it. \ref{Figure1} provides the average profitability of each genre.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Question-4_files/figure-latex/Figure1-1} 
+
+}
+
+\caption{Genre Profitability \label{Figure1}}\label{fig:Figure1}
+\end{figure}
+
+There are three dominant genre categories if profitability is an
+objective for the firm. These are averages (in millions) for each
+category. This is an interesting insight into what movie genre's are
+most viewed, by consumers. Now lets take a look at the movie studios
+\ref{Figure2} ranked from least popular to most popular on the Audience
+score ratings. All the values are averages.
+
+\begin{verbatim}
+## # A tibble: 14 x 5
+##    lead_studio           Audience_Score_percent Profitability World_Gross Rotten
+##    <chr>                                  <dbl>         <dbl>       <dbl>  <dbl>
+##  1 CBS                                     47            2.2         77.1   20  
+##  2 New Line                                47            2.07        20.7   15  
+##  3 Lionsgate                               53            1.81        76.3    7  
+##  4 Warner Bros.                            58.3          3.21       173.    36.4
+##  5 Paramount                               58.5          2.59        80.3   46.2
+##  6 20th Century Fox                        61            2.53        78.4   49  
+##  7 Independent                             63.5          6.58        81.4   47.2
+##  8 <NA>                                    64            3.31        92.6   39  
+##  9 Universal                               64.6          4.44       169.    59  
+## 10 The Weinstein Company                   68.7          1.22        23.3   71.7
+## 11 Fox                                     69            4.51       120.    51.8
+## 12 Sony                                    69.5          4.84       101.    52  
+## 13 Disney                                  71.9          7.41       289.    65.3
+## 14 Summit                                  73.2          6.38       248.    39.2
+\end{verbatim}
+
+This table shows that the Worldwide Gross income from a movie increases
+as the audience score increases. This intuitively makes more sense, as
+the more an audience likes a movie, the more they will influences others
+to watch it. This means that the Audience Score should be a good metric
+to guide what Studios should be included on the streaming platform.
+
+\hypertarget{the-best-of-netflix}{%
+\section{The Best of Netflix}\label{the-best-of-netflix}}
+
+Netflix is a popular streaming platform that boasts about offering a
+variety of highly acclaimed genres to its audience. Lets take a look at
+their top ten movies and shows, according to the IMDB score. The IMDB
+score is my preferred metric, as it is a controlled opinionated
+platform. As movies and shows are subjective, I believe that this may
+offer a better indicator of how popular movies are, compared to the TMDB
+score. The TMDb score is crowd sourced, which means that there is
+possible bias present for the score rating.
+\href{https://www.makeuseof.com/tag/best-alternative-imdb/}{The Make Use
+of} website provides good insight to support my choice.
+
+\begin{verbatim}
+## $Top_Movies
+## # A tibble: 10 x 6
+##    title                                    type  relea~1 genres tmdb_~2 imdb_~3
+##    <chr>                                    <chr>   <dbl> <chr>    <dbl>   <dbl>
+##  1 No Longer Kids                           MOVIE    1979 comed~     7.7     9  
+##  2 Chhota Bheem & Krishna in Mayanagari     MOVIE    2011 anima~     5.1     9  
+##  3 C/o Kancharapalem                        MOVIE    2018 drama      7.6     9  
+##  4 David Attenborough: A Life on Our Planet MOVIE    2020 docum~     8.5     9  
+##  5 Forrest Gump                             MOVIE    1994 drama~     8.5     8.8
+##  6 Inception                                MOVIE    2010 scifi~     8.4     8.8
+##  7 Sky Tour: The Movie                      MOVIE    2020 docum~    NA       8.8
+##  8 Bye Bye London                           MOVIE    1982 comed~     7.5     8.7
+##  9 A Lion in the House                      MOVIE    2006 docum~     6.5     8.7
+## 10 Anbe Sivam                               MOVIE    2003 comed~     7.5     8.7
+## # ... with abbreviated variable names 1: release_year, 2: tmdb_score,
+## #   3: imdb_score
+## 
+## $Top_Shows
+## # A tibble: 10 x 7
+##    title                      type  release_year genres  seasons tmdb_~1 imdb_~2
+##    <chr>                      <chr>        <dbl> <chr>     <dbl>   <dbl>   <dbl>
+##  1 Khawatir                   SHOW          2005 "reali~      11    NA       9.6
+##  2 #ABtalks                   SHOW          2018 ""            1    NA       9.6
+##  3 Breaking Bad               SHOW          2008 "drama~       5     8.8     9.5
+##  4 Avatar: The Last Airbender SHOW          2005 "scifi~       3     8.7     9.3
+##  5 Our Planet                 SHOW          2019 "docum~       1     8.8     9.3
+##  6 Kota Factory               SHOW          2019 "drama~       2     8.2     9.3
+##  7 Reply 1988                 SHOW          2015 "comed~       1     8.7     9.2
+##  8 My Mister                  SHOW          2018 "drama~       1     8.9     9.2
+##  9 Who Rules The World        SHOW          2022 "drama~       1     8.7     9.2
+## 10 The Last Dance             SHOW          2020 "docum~       1     8.2     9.1
+## # ... with abbreviated variable names 1: tmdb_score, 2: imdb_score
+\end{verbatim}
+
+The above table shows Netflix's top ten shows and movies. It appears
+that Netflix's most recent shows, from the past 5 years, are the highest
+scored. It also appears that short lived shows, one season wonders, are
+highly rated compared to the shows with longer seasons. The top ten
+movies mainly consist of the drama genre, as half of the top ten are
+dramas.This correlates to the genre breakdown in \ref{Figure1}.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+When looking at Netflix's top ten shows/movies and what genre is most
+profitable, it is clear that shorter series are highly rated, and
+drama's and comedy is a necessity - for profitability and high audience
+and critic scores.
+
+\bibliography{Tex/ref}
+
+
+
+
+
+\end{document}
