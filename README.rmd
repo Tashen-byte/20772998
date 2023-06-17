@@ -1,0 +1,62 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+# Purpose
+
+
+
+```{r}
+
+rm(list = ls()) # Clean your environment:
+gc() # garbage collection - It can be useful to call gc after a large object has been removed, as this may prompt R to return memory to the operating system.
+library(tidyverse)
+list.files('code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.list() %>% walk(~source(.))
+```
+
+> Packages  The following code is utilised to first load relevant packages that is most appropriate for this project.The location of the project is also added. 
+
+```{r}
+library(Texevier)
+library(fmxdat)
+library(dplyr)
+library(tidyverse)
+library(readxl)
+library(lubridate)
+
+location <- "C:/Users/tashe/Desktop/20772998"
+```
+A folder for each question will be created and formatted according to the Practical test requirements.
+
+# Question One 
+> A Texevier (PDF and HTML) folder is required for this quesiton. 
+
+```{r}
+Texevier::create_template(directory = glue::glue("{location}/"), template_name = "Question 1" )
+```
+
+
+# Question 2
+> A Texevier (PDF and HTML) folder is required for this quesiton. 
+
+```{r}
+Texevier::create_template(directory = glue::glue("{location}/"), template_name = "Question 2")
+```
+
+# Question 3
+> Need to create a folder, utilising teh fmxdat function. 
+
+```{r}
+fmxdat::make_project()
+```
+
+
+# Question 4
+> A Texevier (PDF and HTML) folder is required for this quesiton.
+
+```{r}
+Texevier::create_template(directory = glue::glue("{location}/"), template_name = "Question 4")
+```
+
