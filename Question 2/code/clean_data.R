@@ -6,9 +6,11 @@ library(tidyverse)
 library(readxl)
 
 london_weather <- read_csv("C:/Users/tashe/Desktop/20772998/Question 2/data/London/london_weather.csv") %>%
-    janitor::clean_names()%>%
-    mutate(date = as.Date(date, format = "%Y%m%d")) %>%
-    mutate(date = as.character(date))
+    janitor::clean_names()
+
+london_weather <-  london_weather %>%
+    mutate(date = as.character(date)) %>%
+    mutate(date = as.Date(date, format = "%Y%m%d"))
 
 UK <- read_csv("C:/Users/tashe/Desktop/20772998/Question 2/data/London/UKMonthly_Detailed.csv")
 
@@ -19,6 +21,6 @@ season <- london_weather %>%
     ungroup() %>%
     select(-date)
 
-london_weather <- london_weather %>%
-    inner_join(season)
+# london_weather <- london_weather %>%
+#     inner_join(season)
 

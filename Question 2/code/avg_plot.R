@@ -1,6 +1,6 @@
 over_time <- function(data){
 #need to get the averages for each year
-    avg <- london_weather %>%
+    avg <- data %>%
     group_by( date = format(date, "%Y")) %>%
     summarise(mean_cloud_cover = mean(cloud_cover, na.rm = T),
               mean_sunshine = mean(sunshine, na.rm = T),
@@ -52,7 +52,6 @@ imposed <- sun + cloud + precip + snow + plot_layout(ncol = 1)
 imposed
 }
 
-over_time(avg)
 
 
 

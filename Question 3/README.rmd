@@ -14,22 +14,31 @@ list.files('code/', full.names = T, recursive = T) %>% .[grepl('.R', .)] %>% as.
 ```
 
 # Loading in Data
+Each band's data set of their album history is individually stored in the _data_ folder. the necessary changes to the code are made in the _code/data_load.R_ file. 
 ```{r}
-coldplay <- read_csv("C:/Users/tashe/Desktop/20772998/Question 3/data/Coldplay_vs_Metallica/Coldplay.csv ")
+source("code/data_load.R")
+c <- coldplay
+m <- metallica
 ```
 
-# Comparison
-
-make use of the direct comparison table for each Band. 
+# Battle of the Tunes
+Although these bands are from two completely different genres, they are both well-known. The albums are split between live performances and album performances. Each song is rated by popularity and this is combined to indicate if live or album performances are better.  
 ```{r}
+source("code/num.R")
 cold <- count_performance_table(coldplay)
 metal <- count_performance_table(metallica)
 cold
 metal
 ```
+It is clear that Metallica has much more songs/albums than Coldplay, but this is mainly due to their numerous Remasters that contains repetitions of the same song. However, Coldplay is the more popular band, across their albums and live performances, compared to Metallica. Both bands seem to perform their songs longer in front of a crowd, compared to the album duration.  As one would imagine, the energy and instrumentalness is dominated by Metallica. This shouldn't come as a surprise, as this is a comparison between a heavy metal band and an indie band. The danceability is quite similar between the two bands, and this done come as a surprise.  
 
-compare Coldplay albums to Metallica's graph issued in prac
+I have produced a graph similar to what my colleague has done, but for Coldplay only - since they have done this for Metallica. However, I have not done a Boxplot, but rather a bar graph, as can be seen below. 
 ```{r}
 p <- coldplay_pop_album(coldplay)
 p
 ```
+
+This provides the average popularity for each album, which can be compared to Metallica's. 
+
+# Conclusion 
+In conclusion, these two bands compare well with duration, danceability and instrumentalness. However, these bands differ in terms of the amount of albums/liver performances and popularity.  Coldplay is more much more modern than Metallica and music taste will change over time. Thus, utilising Spotify data base, there will be bias towards Coldplay. 

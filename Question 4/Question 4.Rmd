@@ -92,7 +92,7 @@ output:
     fig_width: 3.5 # Adjust default figure sizes. This can also be done in the chunks of the text.
     fig_height: 3.5
 abstract: |
-  This report provides a short summary of the a breakdown of which genres are most profitbale, which studios are most liked, shows vs mvoies on Netflix.
+  This report provides a short summary of the a breakdown of which genres are most profitbale, which studios are most liked, and what is most liked on Netflix. 
 ---
 
 <!-- First: Set your default preferences for chunk options: -->
