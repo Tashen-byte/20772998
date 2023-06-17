@@ -60,3 +60,10 @@ fmxdat::make_project()
 Texevier::create_template(directory = glue::glue("{location}/"), template_name = "Question 4")
 ```
 
+# Question 5
+> A Texevier (PDF and HTML) folder is required for this quesiton.
+
+```{r}
+Texevier::create_template(directory = glue::glue("{location}/"), template_name = "Question 5")
+```
+
